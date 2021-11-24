@@ -1,0 +1,668 @@
+:root {
+    --background--1: #bddfff;
+    /* App */
+    --background--2: #ffffff;
+    /* Items */
+    --background--3: #dadada;
+    /* Hover */
+    --background--4: #e9e9e9; 
+     /* Box Shadown */
+     --color--1: #003cff;
+}
+
+* {
+    padding: 0;
+    margin: 0;  
+
+    max-width: 700px;
+    letter-spacing: 2px;
+}
+
+ input {
+    border: none;
+    background-color: rgba(255, 255, 255, 0);
+}
+
+input:focus {
+    outline: none;
+} 
+
+button {
+    border: none;
+    background-color: #ffffff00;
+}
+
+.APP {
+    min-width: 100vw;
+    min-height: 1000px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+
+    background-color: var(--background--1);
+
+    overflow-y: scroll;
+    overflow-x: auto;
+}
+
+.Header {
+    width: 100%;
+    min-height: 40px;
+    height: max-content;
+
+    padding: 10px 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    position: fixed;
+
+    z-index: 10000000;
+    /* background-color: bisque; */
+}
+
+.HeaderContent {
+    min-width: 94%;
+    height: min-content;
+
+    padding: 0 5px 0 5px;
+    border-radius: 10px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    background-color: var(--background--2);
+
+    box-shadow: rgba(9, 30, 66, 0.25) 0px 4px 8px -2px, rgba(85, 131, 209, 0.08) 0px 0px 0px 1px;
+}
+
+.SearchBox {
+    width: 100%;
+    min-height: 35px;
+
+    padding: 5px;
+    border-radius: 10px;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    background-color: var(--background--2);
+    box-shadow: 0 .5px 2px #dfdfdf;
+}
+
+.SearchBox-Input {
+    width: auto;
+    height: 100%;
+    margin: 0 5px;
+    font-size: 1.4rem;
+    font-family: Cambria, serif;
+    flex: 1;
+    letter-spacing: 0.5px;
+}
+
+.SearchBox-Btn {
+    width: 30px;
+    height: 30px;
+
+    border-radius: 10px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    font-size: 1.3rem;
+}
+
+.DelBtn {
+    transition: opacity .3s;
+    opacity: 0;
+}
+
+.SearchBox-Btn:active,
+.SearchBox-Btn:hover {
+    background-color: var(--background--3);
+}
+
+.ResultBox {
+    width: 100%;
+    /* max-height: 400px; */
+
+    border-radius:0 0 10px 10px ;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    background-color: #ffffff;
+
+    overflow-x: hidden;
+    overflow-y: hidden;
+    /* display: none; */
+}
+
+.ResultItem {
+    width: 100%;
+    min-height: 45px;
+
+    padding: 0 2px;
+    border-radius: 10px;
+    margin: 2px 0;
+
+    display: flex;
+
+    font-size: 1.4rem;
+}
+
+.ResultItem:hover,
+.ResultItem:active
+ {
+    background-color: #cfcfcf;
+}
+
+.ResultItem:last-child {
+    border-bottom: 5px solid white;
+} 
+
+.ResultItem .BlockContent{
+    width: 100%;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+
+.ResultItem .Main .Name{
+    width: 45%;
+
+}
+.ResultItem .Main .SmallName{
+    width: 45%;
+}
+.ResultItem .BlockContent .Name p
+{
+    letter-spacing: 0px;
+}
+
+.ResultItem .BlockContent .SmallName p{
+    letter-spacing: 0px;
+    font-size: 1rem;
+}
+
+
+.ResultItem .Main,
+.ResultItem .Sub 
+{
+    width: calc(100%-32px);
+    padding-left: 32px;
+}
+
+.ResultItem .Main {
+    min-height: 38px;
+
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.ResultItem.ShowSub .Sub {
+    height: max-content;
+    padding-bottom: 7px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.ResultItem .Sub {
+    display: none;
+}
+
+.ResultItem .Sub .Name{
+    width: 90%;
+}
+
+.ResultItem .Option {
+    width: 30px;
+    height: 30px;
+
+    border-radius: 5px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    font-size: 1.2rem;
+    cursor: pointer;
+
+    z-index: 100000000000000;
+}
+
+.ResultItem .Option:active,
+.ResultItem .Option:hover
+{
+    background-color: #ffffff86;
+}
+
+
+.Container {
+    width: 100%;
+    min-height: calc(100% - 100px);
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 100px;
+}
+
+.SelectorTypeBox{
+    width: 96%;
+    height: max-content;
+
+    padding: 7px 0;
+    border-radius: 10px;
+    display: flex;
+    justify-content:space-evenly;
+    align-items: center;
+
+    background-color: var(--background--2);
+    box-shadow: 0 1px 4px #9b9b9b;
+}
+
+.SelectorTypeBox .Symbol{
+    width: 37%;
+    height: 100%;
+
+    text-align: center;
+ 
+    flex:1;
+    font-weight: 100;
+    font-family: 'Open Sans', sans-serif;
+
+    color: rgb(0, 0, 0);
+}
+
+.SelectorTypeBox .List{
+    width: 63%;
+
+    padding: 7px 0;
+    border-radius: 20px 3px 3px 20px;
+
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-around;
+
+    background-color: #ffffff;
+}
+
+.Type {
+    width: 43%;
+    min-height: 80px;
+    height: 100px;
+
+    border-radius: 15px;
+    margin: 7px;
+
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: space-evenly;
+    align-items: center;
+
+    position: relative;
+    top: 0;
+    left: 0;
+
+    font-family: Consolas;
+    font-size: 1.2rem;
+    text-align: center;
+    text-transform: uppercase;
+
+    color: #fa5757;
+    background-color: var(--background--2);
+    box-shadow: -1px 3px 7px 0px;
+    letter-spacing: 2px;
+    cursor: pointer;
+}
+
+.Type:active,
+.Type:hover {
+    background-color: var(--background--4);
+}
+
+
+.Type:active > .Selection,
+.Type:hover  > .Selection{
+    background-color: var(--background--4);
+}
+
+.Type .Hide {
+    display: block;
+}
+
+.Type .Show {
+    display: none;
+}
+
+.Type.Selected {
+    color: #4ad14a;
+}
+
+.Type.Selected .Show {
+    display: block;
+}
+.Type.Selected .Hide {
+    display: none;
+}
+
+.Type .Selection{
+    width: 30px;
+    height: 30px;
+
+    border-radius: 15px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background-color: #ffffff;
+    position: absolute;
+    bottom: -10px;
+
+    font-size: 1.4rem;
+    z-index: 0;
+}
+
+.ListOfChemistry {
+    width: 100%;
+
+    padding-top: 20px;
+    /* border-top: 1px solid white; */
+    margin-top: 20px;
+
+    display: flex;
+    flex-flow: column wrap;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.MainType {
+    width: 100%;
+
+    padding: 40px 0;
+    border-top: 1px solid var(--color--1);
+    margin: 20px 0;
+
+    display: flex;
+    flex-flow: column wrap;
+    align-items: center;
+
+    position: relative;
+    top: 0;
+    left: 0;
+
+}
+
+.MainType.Hide {
+    display: none;
+}
+
+.MainTypeName{
+    width: max-content;
+    height: 40px;
+    max-height: 40px;
+
+    padding: 0 10px;
+    border-radius: 15px;
+    border: 2px solid var(--color--1);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    position: absolute;
+    top: -20px;
+    left: 10px;
+    text-align: center;
+
+    text-transform: uppercase;
+    font-size: 1.5rem;
+    font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-style: italic; 
+    background-color: var(--background--2);
+
+    color: var(--color--1);
+}
+
+.MainTypeList {
+    width: 100%;
+
+    display: flex;
+    flex-flow: column wrap;
+    align-items: center;
+}
+
+.MainType .Chemical {
+    width: 92%;
+    min-height: 60px;
+
+    border-radius: 12px;
+    margin: 7px 0;
+    background-color: var(--background--2);
+
+    padding: 0 10px;
+
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+
+    font-size: 1.4rem;
+    font-weight: 600;
+    font-family: Arial, Helvetica, sans-serif;
+
+    box-shadow: 0 2px 3px rgb(139, 139, 139);
+}
+
+
+.MainTypeList .Chemical p {
+    letter-spacing: 0px;
+}
+
+
+.MainChemical {
+    width: 100%;
+    min-height: 50px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+
+.Chemical.ShowSubChemical .ChemicalOption {
+    color: rgb(255, 225, 0);
+}
+.Chemical.ShowSubChemical .SubChemical{
+    width: 100%;
+    min-height: 45px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.ChemicalName{
+    width: 90%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.ChemicalName .Name
+{
+    width: 60%;
+}
+
+.ChemicalName .Symbol
+{
+    width: 40%;
+}
+
+.ChemicalName .Name {
+    font-weight: 600;
+    font-size: 1rem;
+    font-family: Arial, Helvetica, sans-serif;
+    
+}
+
+
+.SubChemical{
+    display: none;
+}
+
+.Voice {
+    height: 10px;
+}
+
+.ChemicalOption,
+.SChemicalOption {
+    width: 30px;
+    height: 30px;
+
+    border-radius: 5px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    font-size: 1.7rem;
+    cursor: pointer;
+}
+
+
+.ChemicalOption:active,
+.ChemicalOption:hover,
+.SChemicalOption:active,
+.SChemicalOption:hover
+{
+    background-color: #d1d1d1;
+}
+
+
+
+.inputColor {
+    width: 100px;
+    height: 100px;
+
+    border-radius: 15px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+
+    box-shadow: 0 5px 10px rgb(63, 63, 63);
+}
+
+
+@media screen and (min-width: 0px) and (max-width: 409) {
+            
+        .SelectorTypeBox .Symbol{
+            width: 25%;
+            height: 100%;
+
+            text-align: center;
+        
+            flex:1;
+            font-weight: 100;
+            font-family: 'Open Sans', sans-serif;
+            letter-spacing: 0;
+        }
+
+        .SelectorTypeBox .List{
+            width: 75%;
+
+            padding: 7px 0;
+
+            display: flex;
+            flex-flow: row wrap;
+            justify-content: space-around;
+
+            background-color: #ffffff;
+        }
+
+                
+        .Type {
+            width: 43%;
+            height: 80px;
+
+            border-radius: 15px;
+            margin: 10px 5px;
+
+            display: flex;
+            flex-flow: column nowrap;
+            justify-content: space-evenly;
+            align-items: center;
+
+            font-family: Consolas;
+            text-align: center;
+
+            color: #fa5757;
+            background-color: var(--background--2);
+                box-shadow: -1px 3px 7px 0px;
+        }
+}
+
+
+@media screen and (min-width: 410px) and (max-width: 700px) {
+        
+    .SelectorTypeBox .Symbol{
+        width: 38%;
+        height: 100%;
+
+        text-align: center;
+    
+        flex:1;
+        font-weight: 100;
+        font-family: 'Open Sans', sans-serif;
+        letter-spacing: 0;
+    }
+
+    .SelectorTypeBox .List{
+        width: 62%;
+
+        padding: 7px 0;
+
+        display: flex;
+        flex-flow: row wrap;
+        justify-content: space-around;
+
+        background-color: #ffffff;
+    }
+
+            
+    .Type {
+        width: 43%;
+        height: 80px;
+
+        border-radius: 15px;
+        margin: 10px 5px;
+
+        display: flex;
+        flex-flow: column nowrap;
+        justify-content: space-evenly;
+        align-items: center;
+
+        font-family: Consolas;
+        text-align: center;
+
+        color: #fa5757;
+        background-color: var(--background--2);
+        box-shadow: -1px 3px 7px 0px;
+    }
+}
