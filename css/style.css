@@ -4,6 +4,7 @@
     --hidden--color: #ffffff00;
     --hover--color: #d8d8d8;
     --header--color: #fff;
+    --container--color: #fff;
     --chemical--color: #fff;
 }
 
@@ -13,39 +14,30 @@
 }
 
 body {
-    width: 100vw;
-    min-height: 1000vh;
+    min-height: 100vh;
 
     display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
+    justify-content: space-around;
     align-items: center;
 
     background-color: var(--background--app);
 
-    overflow-x: hidden;
-    overflow-y: scroll;
 }
 
 /* -----------------------------------------------------Header------------------------------------------------------------------- */
 
 .header {
-    width: 96%;
-    min-height: 40px;
-    height: auto;
+    width: 90%;
+    /* height: calc(100vh - 30px); */
 
     padding: 0 5px;
     border-radius: 10px;
+    margin: 15px 0;
 
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
-
-    position: fixed;
-    top: 15px;
-
-    z-index: 100000000000000000;
 
     background-color:var(--header--color);
 }
@@ -162,5 +154,18 @@ body {
 /* -----------------------------------------------------Container------------------------------------------------------------------- */
 
 .container {
-    margin-top: 300px;
+    width: 48%;
+    height: calc(100vh - 30px);
+
+    border-radius: 10px;
+    padding: 0 5px;
+    margin: 10px 0;
+    
+    background-color: var(--container--color);
+}
+
+@media screen and (max-width: 700px){
+    body {
+        flex-flow: column nowrap;
+    }
 }
