@@ -1,7 +1,7 @@
 :root {
     --bg--app: #447ce2;
     --bg--header: rgb(255, 255, 255);
-    --bg--container: rgb(238, 238, 238);
+    --bg--container: #eeeeee;
     --bg--header--search: #ffffff;
     --bg--btn--hov: #d8d8d8;
     --bg--chemical--header: #ffffff;
@@ -112,6 +112,8 @@ body {
     font-weight: 100;
 
     transition: color .3s,background .3s;
+
+    display: none;
 }
 .header .chemical:first-child {
     margin-top: 2px;
@@ -344,6 +346,8 @@ body {
         display: flex;
         flex-direction: column;
         align-items: center;
+
+        background-color: var(--bg--container)
     }
 
     .header {
@@ -356,7 +360,7 @@ body {
 
         position: fixed;
         top: 0;
-        box-shadow: 0 1px 3px 3px #ccc;
+        box-shadow: 1px 4px 11px 1px #ccc;
         z-index: 100000000000000000000;
     }
 
@@ -401,6 +405,5 @@ body {
     align-items: center;
 
     overflow-y: auto;
-
     }
 }
