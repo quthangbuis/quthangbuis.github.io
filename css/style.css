@@ -1,3 +1,6 @@
+@keyframes Show {
+    from {opacity: 0;} to {opacity: 1;}
+}
 :root {
     --bg--app: #447ce2;
     --bg--header: rgb(255, 255, 255);
@@ -9,12 +12,14 @@
     --bg--chemical--container: #ffffff;
     --bg--chemical--hov: #d6d6d6b1;
     --bg--option: #ffffff00;
-    --col--option--hov: #fff700;
+    --col--option--hov: #0099ff;
     --bg--option--hov: #f5f5f500;
     --bg--container-nav: #ffffff;
     --col--container-nav: #000000;
 
 }
+
+/* Keyframe */
 
 * {
     padding: 0;
@@ -25,6 +30,7 @@
 button {
     border: none;
     background-color: #ffffff00;
+    transition: background .2s;
 }
 
 /* Computer */
@@ -32,19 +38,12 @@ button {
 body {
     display: flex;
     justify-content: space-around;
-    /* background-color: var(--bg--app); */
-    /* background-image: url('/img/bg.jpg'); */
 }
 
 .header {
-    /* width: calc(40% - 15px);
-    height: calc(100vh - 20px); */
     width: calc(40% - 10px);
     height: calc(100vh - 10px);
     border: 5px solid var(--bg--header);
-    /* padding: 5px; */
-    /* border-radius: 8px ; */
-    /* margin: 10px 5px 10px 10px; */
     margin: 0;
     display: flex;
     flex-direction: column;
@@ -62,7 +61,6 @@ body {
     display: flex;
     align-items: center;
     background-color: var(--bg--header--search);
-    /* box-shadow: 0 1px 2px rgb(177, 177, 177); */
 }
 
 .header-search__btn {
@@ -102,9 +100,11 @@ body {
 }
 
 .header-search__input:focus {outline: none;}
-.header-result {text-align: center;}
-
-/* .header-result__list {display: none; } */
+.header-result__list {
+    height: max-content;
+    max-height: calc(100vh - 49px);
+    overflow-y: scroll;
+}
 /* ----------------------------------------------------------- */
 .header .chemical {
     width: 100%;
@@ -116,12 +116,13 @@ body {
     font-size: 1.2rem;
     font-weight: 100;
 
-    transition: color .3s,background .3s;
-
-    display: none;
+    transition: color .07s,background .07s;
 }
 .header .chemical:first-child {
     margin-top: 2px;
+}
+.header .chemical:last-child {
+    margin-bottom: 5px;
 }
 
 .header .chemical:hover {
@@ -132,7 +133,6 @@ body {
 .container .chemical {
     width: calc(100% - 10px);
     padding-left: 10px;
-    /* Tong width + Padding left == width */
     border-radius: 8px;
     margin-top: 11px;
     display: flex;
@@ -140,9 +140,10 @@ body {
     background-color: var(--bg--chemical--container);
 
     box-shadow: rgb(204 204 204) -1px 1px 1px 1px;
+    font-size: 1.1rem;
 }
 
-/* .chemical:hover {background-color: var(--bg--chemical--hov);} */
+.chemical:hover {background-color: var(--bg--chemical--hov);}
 
 .chemical .icon{
     width: 44px;
@@ -186,7 +187,7 @@ body {
     background-color: var(--bg--option);
     cursor: pointer;
 
-    transition: color .3s, background .25s;
+    transition: color .1s, background .2s;
 }
 
 .chemical__item-option:hover {
@@ -224,11 +225,6 @@ body {
 /* ----------------------------------------------------------- */
 
 .container {
-    /* width: calc(60% - 25px);
-    height: calc(100vh - 30px);
-    padding: 5px;
-    border-radius: 8px;
-    margin: 10px 10px 10px 5px; */
     width: calc(60% - 20px);
     height: calc(100vh - 20px);
     border: 10px solid var(--bg--container);
@@ -247,6 +243,7 @@ body {
 
     color: var(--col--container-nav);
     background-color: var(--bg--container-nav);
+    box-shadow: -2px 3px 3px #ccc;
 }
 
 .container__nav-selector {
@@ -262,6 +259,7 @@ body {
 
     font-size: 1.4rem;
     text-align: center;
+    transition: all .3s;
 }
 
 .container__nav-selector__btn1 ,
@@ -278,7 +276,7 @@ body {
     
     font-size: 2rem;
     cursor: pointer;
-    transition: background .3s;
+    transition: all .3s;
 }
 
 .container__nav-selector__btn2 {
@@ -293,6 +291,10 @@ body {
 .container__nav-selector__btn2:hover ,
 .container__nav-selector__btn2:active {
     background-color: #c0c0c07e;
+}
+
+.container__nav-selector--heading {
+    animation: Show 1s;
 }
 
 .container__nav-about {
@@ -369,6 +371,10 @@ body {
         z-index: 100000000000000000000;
     }
 
+    .header-result__list {
+        max-height: calc(100vh - 150px);
+    }
+
     .container {
         width: 95%;
         margin-top: 150px;
@@ -412,3 +418,4 @@ body {
     overflow-y: auto;
     }
 }
+
