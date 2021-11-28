@@ -1,3 +1,31 @@
+const  ToChemicalName = ( s ) => {
+    if(s.length == 1) return s
+    const   Number = (x) => '012345678910'.indexOf(x) > -1
+    let str = s[0]
+    for(let i = 1; i < s.length - 1; ++i) {
+        if(Number(s[i])) {
+            if(!Number(s[i-1]) && !Number(s[i+1])) {
+                str +=  '<sub>' + s[i] + '</sub>'
+            } else {
+                if(!Number(s[i-1])) str = str + '<sub>' + s[i]; else str = str + s[i] + '</sub>'
+            }
+        } else str += s[i]
+    }
+    if(Number(s[s.length-1])) str += '<sub>' + s[s.length-1] + '</sub>'; else str += s[s.length-1] 
+    return str;
+}
+
+const   ReCreateArray = (arr, nameOfArr) => {   
+    arr.sort((a,b) => a.symbol.localeCompare(b.symbol))
+    arr.map(Item => {
+        Item.symbol = ToChemicalName(Item.symbol)
+        Item.name.trim()    
+        Item.transcribe.trim()    
+        Item.sound.trim()
+        Item.type = nameOfArr
+    })
+}
+
 const   NguyenTo = [
     {
         name: "Hydrogen",
@@ -1248,6 +1276,7 @@ transcribe: "/vəˈneɪdjəm faɪv haɪˈdrɒksaɪd/",
 sound: "https://res.cloudinary.com/mysound/video/upload/v1637575073/am-thanh/226.mp3"
 }
 ]
+
 
 const Axit = [
 {
@@ -4242,5 +4271,13 @@ const Khac = [
         sound: "https://res.cloudinary.com/mysound/video/upload/v1637575073/am-thanh/164.mp3"
     }
 ]  
+
+ReCreateArray(NguyenTo, 'Nguyên tố')
+ReCreateArray(Axit, 'Axit')
+ReCreateArray(Bazo, 'Bazo')
+ReCreateArray(Oxit, 'Oxit')
+ReCreateArray(Muoi, 'Muối')
+ReCreateArray(ThuatNgu, 'Thuật ngữ')
+ReCreateArray(Khac, 'Khác')
 
 const   Items = [...NguyenTo,...Axit,...Bazo,...Oxit,...Muoi,...ThuatNgu,...Khac]
