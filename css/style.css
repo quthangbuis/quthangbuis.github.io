@@ -346,18 +346,19 @@ body {
         box-shadow: 1px 4px 11px 1px #ccc;
         z-index: 100000000000000000000;
     }
-
-    .header .chemical--secondary-heading {
-        text-align: center;
+    .chemical--secondary {
+        padding-bottom: 7px;
+    }
+    .chemical--secondary-heading {
         flex-direction: column;
     }
-    .header .chemical--secondary-heading--first
-    .header .chemical--secondary-heading--last 
+    .chemical--secondary-heading--first,
+    .chemical--secondary-heading--last 
     {
         width: 100%;
     }
 
-    .chemical__item-heading--last {
+    .chemical--secondary-heading--first {
         text-align: center;
     }
 
@@ -370,6 +371,8 @@ body {
         margin-top: 150px;
         height: auto;
     }
+
+    
 
     .container__nav {
         height: fit-content;
