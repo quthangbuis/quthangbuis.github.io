@@ -107,7 +107,7 @@ const   app = {
                 SubChemicalContainer[i].style.display = (SubChemicalContainer[i].style.display == 'none') ? 'flex' : 'none'
             }
             ListPlayContainer[i].onclick = () => {
-                Voice.src = SourceVoiceContainer[i].innerHTML
+                Voice.src = `https://res.cloudinary.com/mysound/video/upload/v1638146911/am-thanh/${SourceVoiceContainer[i].innerHTML}`
                 Voice.play()
             }
         }
@@ -126,7 +126,7 @@ const   app = {
         HeaderSearchInput.onkeyup = ( e ) => {
             let UserData = e.target.value
             if( UserData ) {
-                console.log(UserData)
+                let Name = ToChemicalName(UserData).toLowerCase()
                 const   check = ( obj ) => {
                     const SubCheck = (s, st) => {
                         s = s.toLowerCase()
@@ -139,14 +139,20 @@ const   app = {
                 }
                 let Result = Items.filter(check)
                 Result.sort((a,b) => {
-                    let x = 0
-                    let y = 0
-                    for(let i = 0; i < UserData.length; ++i)  {
-                        x += a.symbol.indexOf(UserData[i].toLowerCase())
-                        y += b.symbol.indexOf(UserData[i].toLowerCase())
-                    }
-                    return x - y
+                    let x = (a.symbol.toLowerCase().indexOf(UserData) == 0) ? 100 : 0
+                    let y = (b.symbol.toLowerCase().indexOf(UserData) == 0) ? 100 : 0
+                    if(a.symbol.toLowerCase().length > b.symbol.toLowerCase().length) x -= 10; else y -= 10
+                    return y - x;
                 })
+                for(let i = 0; i < Result.length; ++i) {
+                   if(Result[i].symbol.toLowerCase() == Name) {
+                       Result.unshift(Result[i])
+                       for(j = i+1; j < Result.length-1; ++j) Result[j] = Result[j+1]
+                       Result.pop()
+                       break
+                   }
+                   console.log(Result[i].symbol.toLowerCase())
+                }
                 while( Result.length > 10 ) Result.pop()
                 let htmls = Result.map(Item => {
                     return `
@@ -197,7 +203,7 @@ const   app = {
                 for(let i = 0; i < ListPlayHeader.length; ++i) {
                     ListShowHeader[i].onclick = () => SubChemicalHeader[i].style.display = (SubChemicalHeader[i].style.display == 'none') ? 'flex' : 'none'                        
                     ListPlayHeader[i].onclick = () => {
-                        Voice.src = SourceVoiceHeader[i].innerHTML
+                        Voice.src = `https://res.cloudinary.com/mysound/video/upload/v1638146911/am-thanh/${SourceVoiceHeader[i].innerHTML}`
                         Voice.play()
                     }
                 }
