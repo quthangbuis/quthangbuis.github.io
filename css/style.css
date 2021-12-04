@@ -16,7 +16,7 @@
     --bg--option--hov: #f5f5f500;
     --bg--container-nav: #ffffff;
     --col--container-nav: #000000;
-
+    --bg--question: #fff;
 }
 
 /* Keyframe */
@@ -42,7 +42,7 @@ body {
 }
 
 .header {
-    width: calc(40% - 10px);
+    width: calc(35% - 10px);
     height: calc(100vh - 10px);
     border: 5px solid var(--bg--header);
     margin: 0;
@@ -97,7 +97,9 @@ body {
     height: 30px;
     border: none;
     background-color: #ffffff00;
-    font-size: 1.3rem;
+    font-size: 1.3rem; 
+
+    /* cursor: no-drop; */
 }
 
 .header-search__input:focus {outline: none;}
@@ -224,7 +226,7 @@ body {
 /* ----------------------------------------------------------- */
 
 .container {
-    width: calc(60% - 20px);
+    width: calc(65% - 20px);
     height: calc(100vh - 20px);
     border: 10px solid var(--bg--container);
 
@@ -315,12 +317,36 @@ body {
     margin-top: 20px;
 
     display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
+    flex-wrap: wrap;
     align-items: center;
+    justify-content: center;
 
     overflow-y: scroll;
     overflow-x: hidden;
+}
+
+.ToQuestion {
+    width: calc(50% - 20px);
+    height: 90px;
+
+    margin: 10px;
+
+    border-radius: 8px;
+    font-size: 1.4rem;
+    font-weight: 600;
+    background-color: var(--bg--question);
+    cursor: pointer;
+    box-shadow: rgb(179 179 179) -2px 1px 5px 0px;
+}
+
+.ToQuestion.Success {
+    color: white;
+    background-color: rgb(18, 175, 18);
+}
+
+.ToQuestion.Failure {
+    color: white;
+    background-color: red;
 }
 
 @media screen and (max-width: 769px) {
@@ -431,3 +457,168 @@ body {
     }
 }
 
+
+.Q {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background-color: #ccc;
+
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+
+    display: none;
+}
+
+.QContainer {
+    max-width: 700px;
+    width: 80%;
+    padding: 10px 10px 25px 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    border-radius: 25px 10px;
+
+    background-color: #fff;
+
+    /* display: none; */
+}
+.Return {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+    background-color: rgb(0, 166, 255);
+
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+
+    font-size: 2rem;
+    box-shadow: 0 3px 6px rgb(170, 170, 170);
+
+    cursor: pointer;
+}
+
+.Question {
+    max-width: 700px;
+    width: calc(90% - 30px);
+    height: 60px;
+    padding: 0 5px 0 15px 0px;
+    background-color: #fff;
+    border-bottom: 1px solid ;
+
+    font-size: 1.3rem;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.Ans {
+    max-width: 700px;
+    width: calc(90% - 30px);
+    margin-top: 20px;
+    padding: 0 15px;
+
+    background-color: #fff;
+}
+
+.DapAn {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    width: calc(100% - 10px);
+    height: 50px;
+    margin: 10px 0;
+    padding: 2px 10px;
+    border-radius: 3px;
+
+    background-color: rgb(226, 226, 226);
+    font-size: 1.2rem;
+
+    cursor: pointer;
+}
+
+.Res {
+    max-width: 500px;
+    width: 50%;
+    height: 300px;
+    padding: 10px;
+    background-color: #fffbfb;
+
+    border: 2px solid rgb(33, 158, 253);
+    display: flex;
+    text-align: center;
+    flex-direction: column;
+    justify-content: center;
+
+
+
+    position: fixed;
+    top: auto;
+    left: auto;
+
+    border-radius: 5px;
+    display: none;
+
+    box-shadow: 15px 15px 15px #ccc;
+}
+
+.Res .Icon {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    position: absolute;
+    right: 10px;
+    top: 10px;
+
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+.Res .Icon:hover {
+    background-color: #dedede;
+}
+
+.Res div {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items:center;
+
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
+.Res button{
+    width: 150px;
+    height: 50px;
+    font-size: 1.2rem;
+    color: white;
+    background-color: #b1b1b1;
+    border-radius: 3px;
+
+    position: absolute;
+    bottom: 10px;
+    margin: 0 auto;
+
+    cursor: pointer;
+}
