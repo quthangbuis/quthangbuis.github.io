@@ -6400,6 +6400,33 @@ const Khac = [
         }
 ]  
 
+const   CauHoi = [
+    {
+        question: 'Tên Tiếng Anh của Axit là .....? ',
+        ansA: 'ASID',
+        ansB: 'AXID',
+        ansC: 'ACID',
+        ansD: 'AXIDE ',
+        res: 1
+    },
+    {
+        question: 'Chất nào sau đây khác nhất?',
+        ansA: 'Manganese(II) hydroxide',
+        ansB: 'Coban(III) hydroxide',
+        ansC: 'Nickel(II) hydroxide',
+        ansD: 'Iron (II) hydroxide',
+        res: 1
+    },
+    {
+        question: 'Chất nào sau đây khác với các chất còn lại?',
+        ansA: 'Beryllium sulfite',
+        ansB: 'Lithium sulfite',
+        ansC: 'Beryllium sulfate',
+        ansD: 'Magnesium sulfite',
+        res: 1
+    }
+]
+
 ReCreateArray(NguyenTo, 'Nguyên tố')
 ReCreateArray(Axit, 'Axit')
 ReCreateArray(Bazo, 'Bazo')
