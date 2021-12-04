@@ -1,16 +1,19 @@
 const   $ = (x) => document.querySelector(x)
 const   $$ = (x) => document.querySelectorAll(x)
 //  var
+const   body = $('body')
 const   LeftBtn = $('.container__nav-selector__btn1')
 const   RightBtn = $('.container__nav-selector__btn2')
 const   containerNav = $('.container__nav') 
 const   containerNavSelectorHeading = $('.container__nav-selector--heading') 
 const   containerNavAbout = $('.container__nav-about') 
 const   containerList = $('.container__list')
+const   Header = $('.header')
 const   HeaderSearchInput = $('.header-search__input')
 const   HeaderResultList = $('.header-result__list')
 const   DeleteChar = $('.header-search__btn--del')
 const   Voice = $('.Voice')
+const   Q = $('.Q')
 let     SourceVoiceContainer
 let     SubChemicalContainer
 let     ListShowContainer 
@@ -19,6 +22,7 @@ let     SourceVoiceHeader
 let     SubChemicalHeader
 let     ListShowHeader
 let     ListPlayHeader
+let     ListQuestion 
 
 const   app = {
     current: 0,
@@ -57,68 +61,185 @@ const   app = {
             name: 'Khác',
             array: Khac,
             about: ''
+        },
+        {
+            name: 'Luyện tập',
+            array: CauHoi,
+            about: ''
         }
     ],
     render_map: function () {
         let  object = this.Types[this.current]
         // Nav
             containerNavSelectorHeading.innerHTML = `<h1>${object.name}</h1>`
-            if( this.current < 6 ) {
-                containerNavAbout.style.display = 'block'
-                containerNavAbout.innerHTML = `<b>${object.name} là gì?</b><p><b>${object.name}</b>${object.about}</p>`
+            if( this.current <= 6 ) {
+                containerNavAbout.style.display = (this.current != 6) ? 'block' : 'none'
+                containerList.style.flexDirection = 'collum'
+                containerList.style.overflowY = 'scroll'
+                containerNavAbout.innerHTML = (this.current < 6) ? `<b>${object.name} là gì?</b><p><b>${object.name}</b>${object.about}</p>` : ''
+                let  html = object.array.map(Item => {
+                    return `
+                    <div class="chemical">
+                        <div class="chemical--primary chemical__item">
+                            <div class="chemical--primary-heading chemical__item-heading">
+                                <div class="chemical--primary-heading--first chemical__item-heading--first"><b>${Item.symbol}</b></div>
+                            </div>
+                            <div class="chemical--primary-option chemical__item-option">
+                                <ion-icon name="star-sharp"></ion-icon>
+                            </div>
+                        </div>
+                        <div class="chemical--secondary chemical__item" style="display: none;">
+                            <div class="chemical--secondary-heading chemical__item-heading">
+                                <div class="chemical--secondary-heading--first chemical__item-heading--first"><b>${Item.name}</b></div>
+                                <div class="chemical--secondary-heading--last chemical__item-heading--child"><b>${Item.transcribe}</b></div>
+                            </div>
+                            <div class="chemical--secondary-option chemical__item-option">
+                                <ion-icon name="volume-high-sharp"></ion-icon>
+                            </div>
+                        </div>
+                        <p class = "Source" style="display: none;">${Item.sound}</p>
+                    </div>`
+                })
+                containerList.innerHTML = html.join('')
+                // Get Data
+                SubChemicalContainer = $$('.container .chemical--secondary')
+                SourceVoiceContainer = $$('.container .Source')
+                ListShowContainer = $$('.container .chemical--primary-option')
+                ListPlayContainer = $$('.container .chemical--secondary-option')
+                
+                // Handle
+                
+                for(let i = 0; i < ListShowContainer.length; ++i) {
+                    ListShowContainer[i].onclick = () => {
+                        SubChemicalContainer[i].style.display = (SubChemicalContainer[i].style.display == 'none') ? 'flex' : 'none'
+                    }
+                    ListPlayContainer[i].onclick = () => {
+                        Voice.src = `https://res.cloudinary.com/mysound/video/upload/v1638146911/am-thanh/${SourceVoiceContainer[i].innerHTML}`
+                        // Voice.src = `/audio/${SourceVoiceHeader[i].innerHTML}`
+                        Voice.play()
+                        console.log(SourceVoiceHeader)
+                    }
+                }
             } else {
                 containerNavAbout.style.display = 'none'
+                let  count = 0
+                let  html = object.array.map(Item => {
+                    return `
+                    <button class="ToQuestion">
+                        <p>Câu hỏi số ${++count}</p>
+                        <div class="icon">
+                            <ion-icon name="arrow-forward-outline"></ion-icon>
+                        </div>
+                    </button>
+                    `
+                })
+                containerList.innerHTML = html.join('')
+                containerList.style.flexDirection = 'row'
+                containerList.style.overflowY = 'auto'
+                
+                ListQuestion = $$('.ToQuestion')
+
+                for(let i = 0; i < ListQuestion.length; ++i) {
+                    ListQuestion[i].onclick = () => {
+                        Q.style.display = 'flex'
+                        Header.style.display = 'none'
+
+                        let Question = CauHoi[i]
+                        Q.innerHTML = `
+                            <div class="Return">
+                                <!-- <ion-icon name="chevron-back-outline"></ion-icon> -->
+                                <ion-icon name="arrow-back-outline"></ion-icon>
+                            </div>
+                            <div class="QContainer">
+                                <div class="Question">
+                                    <h3>${i + 1}. ${CauHoi[i].question} </h3>
+                                </div>
+                                <div class="Ans">
+                                    <div class="A DapAn">
+                                        <p><b>A</b>.${CauHoi[i].ansA}</p>
+                                    </div>
+                                    <div class="B DapAn">
+                                        <p><b>B</b>.${CauHoi[i].ansB}</p>
+                                    </div>
+                                    <div class="C DapAn">
+                                        <p><b>C</b>.${CauHoi[i].ansC}</p>
+                                    </div>
+                                    <div class="D DapAn">
+                                        <p><b>D</b>.${CauHoi[i].ansD}</p>
+                                    </div>
+                                    <p class = "dapan" style = "display:none;">${CauHoi[i].res}</p>
+                                </div>
+                            </div>
+                            <div class="Res">
+                                <div class="Icon">
+                                    <ion-icon name="close-outline"></ion-icon>
+                                </div>
+                                <div>
+                                    <p style="color: #28b128;"> Chúc mừng ! <br> Đáp án chính xác !!!</p>
+                                </div>
+                            </div>
+                        `
+
+                        let KetQua = $('.Res')
+                        let DAPAN = $('.dapan').innerHTML
+                        let LuaChon = $$('.DapAn')
+                        for(let j = 0; j < LuaChon.length; ++j) {
+                            LuaChon[j].onclick = () => {
+                                KetQua.style.display = 'flex'
+                                 if(j + 1 == DAPAN) {
+                                    KetQua.innerHTML = `
+                                    <div class="Icon">
+                                        <ion-icon name="close-outline"></ion-icon>
+                                    </div>
+                                    <div>
+                                        <p style="color: #1ffd27;"> Chúc mừng ! <br> Đáp án chính xác !!!</p>
+                                    </div>
+                                    <button class = "Close">OK !</button>
+                                    `
+                                    ListQuestion[i].classList.add('Success')
+                                    ListQuestion[i].classList.remove('Failure')
+
+                                } else {
+                                    KetQua.innerHTML = `
+                                    <div class="Icon">
+                                        <ion-icon name="close-outline"></ion-icon>
+                                    </div>
+                                    <div>
+                                        <p style="color: red;">Sai rồi, rèn luyện thêm nhé !!!</p>
+                                    </div>
+                                    <button class = "Close">OK !</button>
+                                    `
+                                    ListQuestion[i].classList.add('Failure')
+                                    ListQuestion[i].classList.remove('Success')
+                                 }
+                                 let Close1 = $('.Icon')
+                                 let Close2 = $('.Close')
+                                 Close1.onclick = () => KetQua.style.display = 'none'
+                                 Close2.onclick = () => KetQua.style.display = 'none'
+                                 
+                            }
+                        }
+                        
+
+                        let Back = $('.Return')
+
+                        Back.onclick = () => {
+                            Q.style.display = 'none'
+                            Header.style.display = 'flex'
+                        }
+                    }
+                }
             }
                 // List
-        let  html = object.array.map(Item => {
-            return `
-            <div class="chemical">
-                <div class="chemical--primary chemical__item">
-                    <div class="chemical--primary-heading chemical__item-heading">
-                        <div class="chemical--primary-heading--first chemical__item-heading--first"><b>${Item.symbol}</b></div>
-                    </div>
-                    <div class="chemical--primary-option chemical__item-option">
-                        <ion-icon name="star-sharp"></ion-icon>
-                    </div>
-                </div>
-                <div class="chemical--secondary chemical__item" style="display: none;">
-                    <div class="chemical--secondary-heading chemical__item-heading">
-                        <div class="chemical--secondary-heading--first chemical__item-heading--first"><b>${Item.name}</b></div>
-                        <div class="chemical--secondary-heading--last chemical__item-heading--child"><b>${Item.transcribe}</b></div>
-                    </div>
-                    <div class="chemical--secondary-option chemical__item-option">
-                        <ion-icon name="volume-high-sharp"></ion-icon>
-                    </div>
-                </div>
-                <p class = "Source" style="display: none;">${Item.sound}</p>
-            </div>`
-        })
-        containerList.innerHTML = html.join('')
-        // Get Data
-        SubChemicalContainer = $$('.container .chemical--secondary')
-        SourceVoiceContainer = $$('.container .Source')
-        ListShowContainer = $$('.container .chemical--primary-option')
-        ListPlayContainer = $$('.container .chemical--secondary-option')
         
-        // Handle
-        
-        for(let i = 0; i < ListShowContainer.length; ++i) {
-            ListShowContainer[i].onclick = () => {
-                SubChemicalContainer[i].style.display = (SubChemicalContainer[i].style.display == 'none') ? 'flex' : 'none'
-            }
-            ListPlayContainer[i].onclick = () => {
-                Voice.src = `https://res.cloudinary.com/mysound/video/upload/v1638146911/am-thanh/${SourceVoiceContainer[i].innerHTML}`
-                Voice.play()
-            }
-        }
     },
     change_map: function () {
         LeftBtn.onclick = () => {
-            this.current = (this.current + 6) % 7;
+            this.current = (this.current + 7) % 8;
             this.render_map()
         }
         RightBtn.onclick = () => {
-            this.current = (this.current + 8) % 7;
+            this.current = (this.current + 9) % 8;
             this.render_map()
         }
     },
@@ -151,7 +272,6 @@ const   app = {
                        Result.pop()
                        break
                    }
-                   console.log(Result[i].symbol.toLowerCase())
                 }
                 while( Result.length > 10 ) Result.pop()
                 let htmls = Result.map(Item => {
@@ -203,6 +323,7 @@ const   app = {
                 for(let i = 0; i < ListPlayHeader.length; ++i) {
                     ListShowHeader[i].onclick = () => SubChemicalHeader[i].style.display = (SubChemicalHeader[i].style.display == 'none') ? 'flex' : 'none'                        
                     ListPlayHeader[i].onclick = () => {
+                        // Voice.src = `/audio/${SourceVoiceHeader[i].innerHTML}`
                         Voice.src = `https://res.cloudinary.com/mysound/video/upload/v1638146911/am-thanh/${SourceVoiceHeader[i].innerHTML}`
                         Voice.play()
                     }
