@@ -6402,12 +6402,108 @@ const Khac = [
 
 const   CauHoi = [
     {
-        question: 'Tên Tiếng Anh của Axit là .....? ',
+        question: 'Tên Tiếng Anh của Axit là .....',
         ansA: 'ASID',
         ansB: 'AXID',
         ansC: 'ACID',
-        ansD: 'AXIDE ',
+        ansD: 'AXIDE',
+        res: 3
+    },
+    {
+        question: 'Tên Tiếng Anh của Oxit là .....',
+        ansA: 'OSID ',
+        ansB: 'OSIDE ',
+        ansC: 'OXID',
+        ansD: 'OXIDE',
+        res: 4
+    },
+    {
+        question: 'Tên Tiếng Anh của Bazơ là .....',
+        ansA: 'BAZEZ',
+        ansB: 'BAZE',
+        ansC: 'BASE',
+        ansD: 'BAXE',
+        res: 3
+    },
+    {
+        question: 'Tên Tiếng Anh của nguyên tố F là?',
+        ansA: 'Fluorine',
+        ansB: 'Flourine',
+        ansC: 'Flour',
+        ansD: 'Flourin',
         res: 1
+    },
+    {
+        question: 'Tên Tiếng Anh của C là?',
+        ansA: 'Cacbon',
+        ansB: 'Cabon',
+        ansC: 'Carbon',
+        ansD: 'Carbonic',
+        res: 3
+    },
+    {
+        question: 'Tên Tiếng Anh của Al là?',
+        ansA: 'Aluminium',
+        ansB: 'Alluminium',
+        ansC: 'Alumminium',
+        ansD: 'Alunium',
+        res: 1
+    },
+    {
+        question: 'Danh pháp nào sau đây chưa đúng?',
+        ansA: 'Sodium sulfide',
+        ansB: 'Potasium chloride',
+        ansC: 'Calcium carbonate',
+        ansD: 'Silver oxide',
+        res: 2
+    },
+    {
+        question: 'Danh pháp nào sau đây là đúng?',
+        ansA: 'Mamganese(II) hydroxide',
+        ansB: 'Coban(III) hydroxide',
+        ansC: 'Nicke(II) hydroxide',
+        ansD: 'Sodiium hydroxide',
+        res: 2
+    },
+    {
+        question: 'Chất nào sau đây viết chưa đúng?',
+        ansA: 'Calci oxide',
+        ansB: 'Lithium sulfite',
+        ansC: 'Beryllium sulfate',
+        ansD: 'Magnesium sulfite',
+        res: 1
+    },
+    {
+        question: 'Đâu là công thức hóa học của Manganese dioxide?',
+        ansA: 'MnO',
+        ansB: 'Mn<sub>2</sub>O',
+        ansC: 'MnO<sub>2</sub>',
+        ansD: 'Mn<sub>2</sub>O<sub>3</sub>',
+        res: 3
+    },
+    {
+        question: 'Công thức hóa học đúng của Sodium hydroxide là?',
+        ansA: 'NaO',
+        ansB: 'NaOH',
+        ansC: 'NaH',
+        ansD: 'Na(OH)<sub>2</sub>',
+        res: 2
+    },
+    {
+        question: 'Công thức hóa học đúng của Sodium sulfide là?',
+        ansA: 'NaS',
+        ansB: 'Na<sub>2</sub>S',
+        ansC: 'Na<sub>2</sub>SO<sub>3</sub>',
+        ansD: 'Na<sub>2</sub>SO<sub>4</sub>',
+        res: 2
+    },
+    {
+        question: 'Chất nào sau đây không cùng nhóm với các chất khác?',
+        ansA: ' Sodium sulfide ',
+        ansB: 'Potassium chloride',
+        ansC: 'Calcium carbonate',
+        ansD: 'Silver oxide',
+        res: 2
     },
     {
         question: 'Chất nào sau đây khác nhất?',
@@ -6415,7 +6511,7 @@ const   CauHoi = [
         ansB: 'Coban(III) hydroxide',
         ansC: 'Nickel(II) hydroxide',
         ansD: 'Iron (II) hydroxide',
-        res: 1
+        res: 4
     },
     {
         question: 'Chất nào sau đây khác với các chất còn lại?',
@@ -6423,7 +6519,7 @@ const   CauHoi = [
         ansB: 'Lithium sulfite',
         ansC: 'Beryllium sulfate',
         ansD: 'Magnesium sulfite',
-        res: 1
+        res: 3
     }
 ]
 
