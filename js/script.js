@@ -9,11 +9,13 @@ const   containerNavSelectorHeading = $('.container__nav-selector--heading')
 const   containerNavAbout = $('.container__nav-about') 
 const   containerList = $('.container__list')
 const   Header = $('.header')
+const   Container = $('.container')
 const   HeaderSearchInput = $('.header-search__input')
 const   HeaderResultList = $('.header-result__list')
 const   DeleteChar = $('.header-search__btn--del')
 const   Voice = $('.Voice')
-const   Q = $('.Q')
+const   ScreenQuestion = $('.Screen')
+
 let     SourceVoiceContainer
 let     SubChemicalContainer
 let     ListShowContainer 
@@ -24,7 +26,7 @@ let     ListShowHeader
 let     ListPlayHeader
 let     ListQuestion 
 
-const   app = {
+const app = {
     current: 0,
     Types: [
         {
@@ -68,179 +70,156 @@ const   app = {
             about: ''
         }
     ],
-    render_map: function () {
-        let  object = this.Types[this.current]
-        // Nav
-            containerNavSelectorHeading.innerHTML = `<h1>${object.name}</h1>`
-            if( this.current <= 6 ) {
-                containerNavAbout.style.display = (this.current != 6) ? 'block' : 'none'
-                containerList.style.flexDirection = 'collum'
-                containerList.style.overflowY = 'scroll'
-                containerNavAbout.innerHTML = (this.current < 6) ? `<b>${object.name} là gì?</b><p><b>${object.name}</b>${object.about}</p>` : ''
-                let  html = object.array.map(Item => {
-                    return `
-                    <div class="chemical">
-                        <div class="chemical--primary chemical__item">
-                            <div class="chemical--primary-heading chemical__item-heading">
-                                <div class="chemical--primary-heading--first chemical__item-heading--first"><b>${Item.symbol}</b></div>
-                            </div>
-                            <div class="chemical--primary-option chemical__item-option">
-                                <ion-icon name="star-sharp"></ion-icon>
-                            </div>
-                        </div>
-                        <div class="chemical--secondary chemical__item" style="display: none;">
-                            <div class="chemical--secondary-heading chemical__item-heading">
-                                <div class="chemical--secondary-heading--first chemical__item-heading--first"><b>${Item.name}</b></div>
-                                <div class="chemical--secondary-heading--last chemical__item-heading--child"><b>${Item.transcribe}</b></div>
-                            </div>
-                            <div class="chemical--secondary-option chemical__item-option">
-                                <ion-icon name="volume-high-sharp"></ion-icon>
-                            </div>
-                        </div>
-                        <p class = "Source" style="display: none;">${Item.sound}</p>
-                    </div>`
-                })
-                containerList.innerHTML = html.join('')
-                // Get Data
-                SubChemicalContainer = $$('.container .chemical--secondary')
-                SourceVoiceContainer = $$('.container .Source')
-                ListShowContainer = $$('.container .chemical--primary-option')
-                ListPlayContainer = $$('.container .chemical--secondary-option')
-                
-                // Handle
-                
-                for(let i = 0; i < ListShowContainer.length; ++i) {
-                    ListShowContainer[i].onclick = () => {
-                        SubChemicalContainer[i].style.display = (SubChemicalContainer[i].style.display == 'none') ? 'flex' : 'none'
-                    }
-                    ListPlayContainer[i].onclick = () => {
-                        Voice.src = `https://res.cloudinary.com/mysound/video/upload/v1638146911/am-thanh/${SourceVoiceContainer[i].innerHTML}`
-                        // Voice.src = `/audio/${SourceVoiceHeader[i].innerHTML}`
-                        Voice.play()
-                        console.log(SourceVoiceHeader)
-                    }
-                }
+    render: function () {
+        console.log('Will render')
+        let  index = app.current
+        let  object = app.Types[index]
+        containerNavSelectorHeading.innerHTML = `<h1>${object.name}</h1>`
+
+        if(index < 7) {
+
+            if(index != 6) {
+                containerNavAbout.style.display = 'block'
+                containerNavAbout.innerHTML = `<b>${object.name} là gì?</b><p><b>${object.name}</b>${object.about}</p>`
             } else {
                 containerNavAbout.style.display = 'none'
-                let  count = 0
-                let  html = object.array.map(Item => {
-                    return `
-                    <button class="ToQuestion">
-                        <p>Câu hỏi số ${++count}</p>
-                        <div class="icon">
-                            <ion-icon name="arrow-forward-outline"></ion-icon>
+            }
+
+            let htmls = object.array.map(Item => {
+                return `
+                <div class="chemical">
+                    <div class="chemical--primary chemical__item">
+                        <div class="chemical--primary-heading chemical__item-heading">
+                            <div class="chemical--primary-heading--first chemical__item-heading--first"><b>${Item.symbol}</b></div>
                         </div>
-                    </button>
-                    `
-                })
-                containerList.innerHTML = html.join('')
-                containerList.style.flexDirection = 'row'
-                containerList.style.overflowY = 'auto'
+                        <div class="chemical--primary-option chemical__item-option">
+                            <ion-icon name="star-sharp"></ion-icon>
+                        </div>
+                    </div>
+                    <div class="chemical--secondary chemical__item" style="display: none;">
+                        <div class="chemical--secondary-heading chemical__item-heading">
+                            <div class="chemical--secondary-heading--first chemical__item-heading--first"><b>${Item.name}</b></div>
+                            <div class="chemical--secondary-heading--last chemical__item-heading--child"><b>${Item.transcribe}</b></div>
+                        </div>
+                        <div class="chemical--secondary-option chemical__item-option">
+                            <ion-icon name="volume-high-sharp"></ion-icon>
+                        </div>
+                    </div>
+                    <p class = "Source" style="display: none;">${Item.sound}</p>
+                </div>`
+            })
+            containerList.innerHTML = htmls.join('')
+
+            SubChemicalContainer = $$('.container .chemical--secondary')
+            SourceVoiceContainer = $$('.container .Source')
+            ListShowContainer = $$('.container .chemical--primary-option')
+            ListPlayContainer = $$('.container .chemical--secondary-option')
+            
+            for(let i = 0; i < ListShowContainer.length; ++i) {
+                ListShowContainer[i].onclick = () => {
+                    SubChemicalContainer[i].style.display = (SubChemicalContainer[i].style.display == 'none') ? 'flex' : 'none'
+                }
+
+                ListPlayContainer[i].onclick = () => {
+                    Voice.src = `https://res.cloudinary.com/mysound/video/upload/v1638146911/am-thanh/${SourceVoiceContainer[i].innerHTML}`
+                    Voice.play()  
+                }
+            }
+        
+        } else {
+            containerNavAbout.style.display = 'none'
+
+            let  count = 0
+            let  htmls = object.array.map(Item => {
+                return `
+                <button class="ToQuestion">
+                    <p>Câu hỏi số ${++count}</p>
+                    <div class="icon">
+                        <ion-icon name="arrow-forward-outline"></ion-icon>
+                    </div>
+                </button>
+                `
+            })
+            containerList.innerHTML = htmls.join('')
+
+            ListQuestion = $$('.ToQuestion')
+
+            for(let i = 0; i < ListQuestion.length; ++i) {
+                ListQuestion[i].onclick = () => {
+                    Header.style.display = 'none'
+                    Container.style.display = 'none'
+                    ScreenQuestion.style.display = 'flex'
+                    let Question = CauHoi[i]
+                    ScreenQuestion.innerHTML = `         
+                        <button class="BackBtn" title="Quay Lại">
+                            <ion-icon name="return-down-back-outline"></ion-icon>
+                        </button>
                 
-                ListQuestion = $$('.ToQuestion')
-
-                for(let i = 0; i < ListQuestion.length; ++i) {
-                    ListQuestion[i].onclick = () => {
-                        Q.style.display = 'flex'
-                        Header.style.display = 'none'
-
-                        let Question = CauHoi[i]
-                        Q.innerHTML = `
-                            <div class="Return">
-                                <!-- <ion-icon name="chevron-back-outline"></ion-icon> -->
-                                <ion-icon name="arrow-back-outline"></ion-icon>
+                        <div class="Main">
+                            <div class="Question">
+                                <p>${i + 1}. ${Question.question}</p>
                             </div>
-                            <div class="QContainer">
-                                <div class="Question">
-                                    <h3>${i + 1}. ${CauHoi[i].question} </h3>
+                            <div class="Select">
+                                <div class="Choose">
+                                    <p style = "margin-right: 7px;">A.</p><p> ${Question.ansA}</p>
                                 </div>
-                                <div class="Ans">
-                                    <div class="A DapAn">
-                                        <p><b>A</b>.${CauHoi[i].ansA}</p>
-                                    </div>
-                                    <div class="B DapAn">
-                                        <p><b>B</b>.${CauHoi[i].ansB}</p>
-                                    </div>
-                                    <div class="C DapAn">
-                                        <p><b>C</b>.${CauHoi[i].ansC}</p>
-                                    </div>
-                                    <div class="D DapAn">
-                                        <p><b>D</b>.${CauHoi[i].ansD}</p>
-                                    </div>
-                                    <p class = "dapan" style = "display:none;">${CauHoi[i].res}</p>
+                                <div class="Choose">
+                                    <p style = "margin-right: 7px;">B.</p><p> ${Question.ansB}</p>
                                 </div>
+                                <div class="Choose">
+                                    <p style = "margin-right: 7px;">C.</p><p> ${Question.ansC}</p>
+                                </div>
+                                <div class="Choose">
+                                    <p style = "margin-right: 7px;">D.</p><p> ${Question.ansD}</p>
+                                </div>
+                                <p style = "display: none;">${Question.res}</p>
                             </div>
-                            <div class="Res">
-                                <div class="Icon">
-                                    <ion-icon name="close-outline"></ion-icon>
-                                </div>
-                                <div>
-                                    <p style="color: #28b128;"> Chúc mừng ! <br> Đáp án chính xác !!!</p>
-                                </div>
-                            </div>
-                        `
+                        </div>
+                    `
+                    Back = $('.BackBtn')
+                    Back.onclick = () => {
+                        ScreenQuestion.style.display = 'none'
+                        Header.style.display = 'block'
+                        Container.style.display = 'block'
+                    }                    
 
-                        let KetQua = $('.Res')
-                        let DAPAN = $('.dapan').innerHTML
-                        let LuaChon = $$('.DapAn')
-                        for(let j = 0; j < LuaChon.length; ++j) {
-                            LuaChon[j].onclick = () => {
-                                KetQua.style.display = 'flex'
-                                 if(j + 1 == DAPAN) {
-                                    KetQua.innerHTML = `
-                                    <div class="Icon">
-                                        <ion-icon name="close-outline"></ion-icon>
-                                    </div>
-                                    <div>
-                                        <p style="color: #1ffd27;"> Chúc mừng ! <br> Đáp án chính xác !!!</p>
-                                    </div>
-                                    <button class = "Close">OK !</button>
-                                    `
-                                    ListQuestion[i].classList.add('Success')
-                                    ListQuestion[i].classList.remove('Failure')
+                    let ListChoose = $$('.Choose')
 
-                                } else {
-                                    KetQua.innerHTML = `
-                                    <div class="Icon">
-                                        <ion-icon name="close-outline"></ion-icon>
-                                    </div>
-                                    <div>
-                                        <p style="color: red;">Sai rồi, rèn luyện thêm nhé !!!</p>
-                                    </div>
-                                    <button class = "Close">OK !</button>
-                                    `
-                                    ListQuestion[i].classList.add('Failure')
-                                    ListQuestion[i].classList.remove('Success')
-                                 }
-                                 let Close1 = $('.Icon')
-                                 let Close2 = $('.Close')
-                                 Close1.onclick = () => KetQua.style.display = 'none'
-                                 Close2.onclick = () => KetQua.style.display = 'none'
-                                 
+                    for(let j = 0; j < ListChoose.length; ++j) {
+                        ListChoose[j].onclick = () => {
+                            if(j + 1 + '' == Question.res) {
+                                ListChoose[j].style.color = '#00aa00'   
+                                ListChoose[j].style.fontSize = '1.3rem'   
+                                alert('Chúc mừng ! Đáp án chính xác')
+                                ListQuestion[i].classList.add('Success') 
+                                ListQuestion[i].classList.remove('Failure') 
+                            } else {
+                                ListChoose[j].style.color = 'red'   
+                                
+                                if( ListChoose[Question.res - 1].style.color != '#00aa00') {
+                                    ListQuestion[i].classList.add('Failure') 
+                                    ListQuestion[i].classList.remove('Success')   
+                                }   
+
                             }
-                        }
-                        
-
-                        let Back = $('.Return')
-
-                        Back.onclick = () => {
-                            Q.style.display = 'none'
-                            Header.style.display = 'flex'
                         }
                     }
                 }
             }
-                // List
+        }
+
         
+
+
     },
-    change_map: function () {
+    change: function () {
         LeftBtn.onclick = () => {
-            this.current = (this.current + 7) % 8;
-            this.render_map()
+            app.current = (app.current + 8 - 1) % 8;
+            app.render()
         }
         RightBtn.onclick = () => {
-            this.current = (this.current + 9) % 8;
-            this.render_map()
+            app.current = (app.current + 8 + 1) % 8;
+            app.render()
         }
     },
     search: function () {
@@ -266,12 +245,12 @@ const   app = {
                     return y - x;
                 })
                 for(let i = 0; i < Result.length; ++i) {
-                   if(Result[i].symbol.toLowerCase() == Name) {
-                       Result.unshift(Result[i])
-                       for(j = i+1; j < Result.length-1; ++j) Result[j] = Result[j+1]
-                       Result.pop()
-                       break
-                   }
+                    if(Result[i].symbol.toLowerCase() == Name) {
+                        Result.unshift(Result[i])
+                        for(j = i+1; j < Result.length-1; ++j) Result[j] = Result[j+1]
+                        Result.pop()
+                        break
+                    }
                 }
                 while( Result.length > 10 ) Result.pop()
                 let htmls = Result.map(Item => {
@@ -333,17 +312,14 @@ const   app = {
                 DeleteChar.style.display = 'none'
             }
         }
-
-        
     },
-    start: function () {               
-        this.render_map()
-        this.change_map()
-        this.search()
+    start: function () {
+        app.render()
+        app.change()
+        app.search()
     }
 }
 
 app.start()
-
 document.cookie = "SameSite=None"
 document.cookie = "Secure"
