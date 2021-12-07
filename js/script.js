@@ -71,7 +71,6 @@ const app = {
         }
     ],
     render: function () {
-        console.log('Will render')
         let  index = app.current
         let  object = app.Types[index]
         containerNavSelectorHeading.innerHTML = `<h1>${object.name}</h1>`
@@ -93,7 +92,7 @@ const app = {
                             <div class="chemical--primary-heading--first chemical__item-heading--first"><b>${Item.symbol}</b></div>
                         </div>
                         <div class="chemical--primary-option chemical__item-option">
-                            <ion-icon name="star-sharp"></ion-icon>
+                            <ion-icon name="volume-high-sharp"></ion-icon>
                         </div>
                     </div>
                     <div class="chemical--secondary chemical__item" style="display: none;">
@@ -266,7 +265,7 @@ const app = {
                                     <div class="chemical--primary-heading--last chemical__item-heading--last"><p>${Item.type}</p></div>
                                 </div>
                                 <div class="chemical--primary-option chemical__item-option">
-                                    <ion-icon name="star-sharp"></ion-icon>
+                                    <ion-icon name="volume-high-sharp"></ion-icon>
                                 </div>
                             </div>
                             <div class="chemical--secondary chemical__item" style="display: none;">
