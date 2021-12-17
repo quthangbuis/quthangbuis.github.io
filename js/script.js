@@ -65,7 +65,7 @@ const app = {
             about: ''
         },
         {
-            name: 'Practie',
+            name: 'Practice',
             array: CauHoi,
             about: ''
         }
