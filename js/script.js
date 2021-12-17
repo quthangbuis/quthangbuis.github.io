@@ -30,42 +30,42 @@ const app = {
     current: 0,
     Types: [
         {
-            name: 'Nguyên tố',
+            name: 'Element',
             array: NguyenTo,
             about: ' là chất hóa học tinh khiết, bao gồm một kiểu nguyên tử, được phân biệt bởi số hiệu nguyên tử, là số lượng proton có trong mỗi hạt nhân.'
         },
         {
-            name: 'Axit',
+            name: 'Acid',
             array: Axit,
             about: ' là hợp chất hóa học mà trong thành phần phân tử của các chất đó đều có chứa 1 hay nhiều nguyên tử hiđro liên kết với gốc axit.'
         },
         {
-            name: 'Bazơ',
+            name: 'Base',
             array: Bazo,
             about: ' là hợp chất hóa học mà phân tử của nó bao gồm có một nguyên tử kim loại liên kết với một hay nhiều nhóm hidroxit (OH), Trong đó hóa trị của kim loại bằng số nhóm hidroxit.'
         },
         {
-            name: 'Oxit',
+            name: 'Oxide',
             array: Oxit,
             about: ' là hợp chất hóa học có chứa hai nguyên tố, trong đó có một nguyên tố là oxi.<br> Công thức chung của oxit là: MxOy.'
         },
         {
-            name: 'Muối',
+            name: 'Salt',
             array: Muoi,
             about: ' là hợp chất hóa học bao gồm một tổ hợp ion của các cation và anion . Muối bao gồm số lượng liên quan của các cation (ion mang điện tích dương) và anion (ion mang điện tích âm) để sản phẩm là trung hòa về điện (không có điện tích thực).'
         },
         {
-            name: 'Thuật ngữ',
+            name: 'Terminology',
             array: ThuatNgu,
             about: ' hóa học là những từ ngữ biểu thị khái niệm hóa học, chủ yếu để dùng trong các văn bản khoa học về hóa học và trong giảng dạy.'
         },
         {
-            name: 'Khác',
+            name: 'Others',
             array: Khac,
             about: ''
         },
         {
-            name: 'Luyện tập',
+            name: 'Practie',
             array: CauHoi,
             about: ''
         }
